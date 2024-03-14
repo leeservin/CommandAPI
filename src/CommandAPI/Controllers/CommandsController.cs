@@ -22,5 +22,17 @@ namespace CommandAPI.Controllers
 
             return Ok(commandItems);
         }
+                //GET api/commands/{id}
+        //[Authorize]       //Apply this attribute to lockdown this ActionResult (or others)
+        [HttpGet("{id}", Name = "GetCommandById")]
+        public ActionResult<Command> GetCommandById(int id)
+        {
+            var commandItem = _repository.GetCommandById(id);
+            if (commandItem == null)
+            {
+                return NotFound();
+            }
+            return Ok(commandItem);
+        }
     }
 }
